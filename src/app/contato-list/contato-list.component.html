@@ -1,0 +1,54 @@
+<div>
+    <h2>Listagem de Contatos</h2>
+    <div>
+        <table>
+            <thead *ngIf="!flagListaVazia">
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Idade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let itemContato of contatos">
+                    <td><a href="#">{{ itemContato.nome }}</a></td>
+                    <td><span>{{ itemContato.telefone }}</span></td>
+                    <td><span>{{ itemContato.idade }}</span></td>
+                    <td>
+                        <button type="button" (click)="editContato(contato)"> Editar </button>
+                        <button type="button" (click)="deleteContato(contato)"> Deletar </button>
+                    </td>
+                </tr>
+
+                <tr *ngIf="flagListaVazia">                    
+                    <span><b>Lista Vazia</b></span>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button (click)="VoltarBtn()"></button>
+
+    <div>
+        <h5>Adicionar | Atualizar Contato</h5>
+        <div>
+            <form id="add-form" (ngSubmit)="saveContato(form)" #form="ngForm">
+                <div>
+                    <label for="nome"> Nome Completo </label>
+                    <input id="nome" type="text" [(ngModel)]="contato.nome" name="nome" #nome="ngModel" placeholder="Digite o nome" >
+                </div>
+                <div>
+                    <label for="telefone"> Telefone com DDD </label>
+                    <input id="telefone" type="text" [(ngModel)]="contato.telefone" name="telefone" #nome="ngModel" placeholder="Digite o telefone" >
+                </div>
+                <div>
+                    <label for="idade"> Idade </label>
+                    <input id="idade" type="text" [(ngModel)]="contato.idade" name="idade" #nome="ngModel" placeholder="Digite a idade" >
+                </div>
+                <button type="submit"> Salvar </button>
+                <button type="reset" (click)="cleanForm(form)"> Cancelar </button>
+            </form>
+        </div>
+    </div>
+</div>
